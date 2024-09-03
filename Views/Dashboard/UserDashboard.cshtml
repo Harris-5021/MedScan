@@ -1,0 +1,279 @@
+@{
+    ViewData["Title"] = "X-Ray Analysis Dashboard";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewData["Title"] - MedScan</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src=@("https://cdn.jsdelivr.net/npm/@tensorflow/tfjs")></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #0f0f0f;
+            color: #fff;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #1d0635;;
+            padding: 10px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+        }
+        .navbar-container {
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            margin-left: 0;
+        }
+        .navbar-logo {
+            margin-right: 20px;
+        }
+        .navbar-logo img {
+            height: 40px;
+            vertical-align: middle;
+        }
+        .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+        .navbar-links a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 15px;
+            margin-right: 10px;
+            border: 1px solid #fff;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        .navbar-links a:hover {
+            background-color: #fff;
+            color: #1a1a1a;
+        }
+        .container {
+            padding-top: 80px;
+            min-height: calc(100vh - 80px);
+            background: linear-gradient(135deg, #2c0051 0%, #1a0036 100%);
+        }
+        .dashboard-box {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            width: 90%;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(45deg, #9d4edd, #5a189a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .btn-primary {
+            background: linear-gradient(45deg, #9d4edd, #5a189a);
+            border: none;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(157, 78, 221, 0.4);
+        }
+        .form-control {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+        }
+        .progress {
+            height: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        .progress-bar {
+            height: 100%;
+            background-color: #9d4edd;
+            border-radius: 10px;
+            transition: width 0.3s ease;
+        }
+        .alert {
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+        }
+        .alert-success {
+            background-color: rgba(92, 184, 92, 0.2);
+            border: 1px solid #5cb85c;
+            color: #5cb85c;
+        }
+        .alert-danger {
+            background-color: rgba(217, 83, 79, 0.2);
+            border: 1px solid #d9534f;
+            color: #d9534f;
+        }
+        img.rounded {
+            max-width: 100%;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="/" class="navbar-logo">
+                <img src="/images/medscan_logo.jpg" alt="MedScan Logo">
+            </a>
+            <div class="navbar-links">
+                <a href="/">Home</a>
+                <a href="/Account/Login">Login</a>
+                <a href="/Account/Register">Register for free!</a>
+                <a href="/Home/Privacy">About Us and Privacy</a>
+                <a href="/">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="dashboard-box">
+            <h1>X-Ray Analysis Dashboard</h1>
+            <div id="xray-dashboard"></div>
+        </div>
+    </div>
+
+    <script type="text/babel">
+        const { useState, useEffect, useCallback } = React;
+
+        const XRayAnalysisDashboard = () => {
+            const [model, setModel] = useState(null);
+            const [selectedFile, setSelectedFile] = useState(null);
+            const [imagePreview, setImagePreview] = useState(null);
+            const [analysisResult, setAnalysisResult] = useState(null);
+            const [isAnalyzing, setIsAnalyzing] = useState(false);
+            const [modelLoadingProgress, setModelLoadingProgress] = useState(0);
+
+            useEffect(() => {
+                loadModel();
+            }, []);
+
+            const loadModel = async () => {
+                try {
+                    const loadedModel = await tf.loadLayersModel('/models/tfjs_model/model.json', {
+                        onProgress: (fraction) => {
+                            setModelLoadingProgress(Math.round(fraction * 100));
+                        },
+                    });
+                    setModel(loadedModel);
+                } catch (error) {
+                    console.error('Failed to load model:', error);
+                }
+            };
+
+            const preprocess = useCallback((img) => {
+                const tensor = tf.browser.fromPixels(img)
+                    .resizeNearestNeighbor([150, 150])
+                    .toFloat()
+                    .div(tf.scalar(255))
+                    .expandDims(0);
+                return tensor;
+            }, []);
+
+            const handleFileChange = (event) => {
+                const file = event.target.files[0];
+                if (file) {
+                    setSelectedFile(file);
+                    const reader = new FileReader();
+                    reader.onloadend = () => {
+                        setImagePreview(reader.result);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            };
+
+            const analyzeImage = async () => {
+                if (!model || !selectedFile) return;
+
+                setIsAnalyzing(true);
+                setAnalysisResult(null);
+
+                const img = new Image();
+                img.onload = async () => {
+                    const tensor = preprocess(img);
+                    const prediction = await model.predict(tensor).data();
+                    const probability = prediction[0];
+                    const result = probability > 0.5 ? "Pneumonia" : "Normal";
+                    setAnalysisResult({ result, probability });
+                    setIsAnalyzing(false);
+                };
+                img.src = URL.createObjectURL(selectedFile);
+            };
+
+            return (
+                <div>
+                    {modelLoadingProgress < 100 ? (
+                        <div>
+                            <p>Loading model... {modelLoadingProgress}%</p>
+                            <div className="progress">
+                                <div className="progress-bar" style={{width: `${modelLoadingProgress}%`}}></div>
+                            </div>
+                        </div>
+                    ) : (
+                        <div className="alert alert-success">
+                            Model loaded successfully. You can now analyze X-ray images.
+                        </div>
+                    )}
+
+                    <input type="file" className="form-control" onChange={handleFileChange} accept="image/*" />
+
+                    {imagePreview && (
+                        <img src={imagePreview} alt="X-ray Preview" className="rounded" />
+                    )}
+
+                    <button
+                        onClick={analyzeImage}
+                        disabled={!model || !selectedFile || isAnalyzing}
+                        className="btn-primary"
+                    >
+                        {isAnalyzing ? 'Analysing...' : 'Analyse Image'}
+                    </button>
+
+                    {analysisResult && (
+                        <div className={`alert ${analysisResult.result === 'Normal' ? 'alert-success' : 'alert-danger'}`}>
+                            <h4>{analysisResult.result}</h4>
+                            <p>Probability of Pneumonia is: {(analysisResult.probability * 100).toFixed(2)}%</p>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<XRayAnalysisDashboard />, document.getElementById('xray-dashboard'));
+    </script>
+</body>
+</html>
