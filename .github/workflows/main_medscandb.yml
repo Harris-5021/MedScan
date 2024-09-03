@@ -53,4 +53,4 @@ jobs:
           app-name: 'MEDSCANDB'
           slot-name: 'Production'
           package: .
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_FC2B72D5BD0D444ABBBC751EE4E663B2 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_25E41B2D2F064100A1F289E076A406EE }}
