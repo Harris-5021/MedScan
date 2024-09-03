@@ -9,12 +9,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewData["Title"] - MedScan</title>
+    
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
+        
+
+.navbar-logo {
+    position: absolute;
+    top: 50px;
+    left: 685px;
+    z-index: 1001;
+}
+
+.navbar-logo img {
+    width: auto;
+    height: 150px; /* Adjust this value to set the desired logo size */
+}
         body {
             font-family: Arial, sans-serif;
             line-height: 1.6;
@@ -114,6 +128,9 @@
     </style>
 </head>
 <body>
+    <a href="/" class="navbar-logo">
+                <img src="/images/medscan_logo.jpg" alt="MedScan Logo">
+            </a>
     <button class="menu-toggle">☰</button>
     
     <nav class="side-menu">
@@ -136,8 +153,11 @@
     <main>
         <section id="home" class="hero">
             <div class="container">
-                <h1>AI-Powered Medical Imaging</h1>
-                <p>Experience the future of healthcare with MedScan's advanced technology. Faster diagnoses, improved accuracy, and seamless collaboration.</p>
+                <h1>&nbsp;</h1>
+                <h1>&nbsp;</h1>
+
+                <p>Experience the future of healthcare with MedScan's advanced technology. Fast diagnoses and High accuracy.</p>
+                <p>                                  Fast diagnoses, High accuracy.</p>
                 <li class="cta-button">
                         <a class="cta-button" asp-area="" asp-controller="Account" asp-action="Register">New user? Click here to get started!</a>
                     </li>
@@ -157,8 +177,8 @@
                         <p>HIPAA-compliant security measures to protect patient data.</p>
                     </div>
                     <div class="feature-item">
-                        <h3>Collaboration Tools</h3>
-                        <p>Easy sharing and discussion features for healthcare teams.</p>
+                        <h3>Accessibility</h3>
+                        <p>Access the tool from anywhere, on any device with internet connection</p>
                     </div>
                 </div>
             </div>

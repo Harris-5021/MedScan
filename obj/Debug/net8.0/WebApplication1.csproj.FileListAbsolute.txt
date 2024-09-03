@@ -135,3 +135,4 @@ C:\Users\harri\Desktop\c#\WebApplication1\obj\Debug\net8.0\WebApplication1.pdb
 C:\Users\harri\Desktop\c#\WebApplication1\obj\Debug\net8.0\WebApplication1.genruntimeconfig.cache
 C:\Users\harri\Desktop\c#\WebApplication1\obj\Debug\net8.0\ref\WebApplication1.dll
 C:\Users\harri\Desktop\c#\WebApplication1\bin\Debug\net8.0\BCrypt.Net-Next.dll
+C:\Users\harri\Desktop\c#\WebApplication1\obj\Debug\net8.0\WebApplication1.sourcelink.json
