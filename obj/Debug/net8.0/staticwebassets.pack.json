@@ -13,16 +13,8 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
-      "Id": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\images\\giphy-ezgif.com-resize (1).webp",
-      "PackagePath": "staticwebassets\\images\\giphy-ezgif.com-resize (1).webp"
-    },
-    {
       "Id": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\images\\medscan_logo.jpg",
       "PackagePath": "staticwebassets\\images\\medscan_logo.jpg"
-    },
-    {
-      "Id": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\images\\pngtree-an-xray-of-the-spinal-ribs-image_13305332.jpg",
-      "PackagePath": "staticwebassets\\images\\pngtree-an-xray-of-the-spinal-ribs-image_13305332.jpg"
     },
     {
       "Id": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\js\\site.js",

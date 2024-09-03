@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bhzL1u5twRZOmtychn4AlHV0JqxqrOY5pvizs2ybwsE=",
+  "Hash": "KYzjufyP15OBEmDckHvp/y6puXgz1gcS9kO71ovfmS8=",
   "Source": "WebApplication1",
   "BasePath": "_content/WebApplication1",
   "Mode": "Default",
@@ -93,25 +93,6 @@
       "OriginalItemSpec": "wwwroot\\favicon.ico"
     },
     {
-      "Identity": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\images\\giphy-ezgif.com-resize (1).webp",
-      "SourceId": "WebApplication1",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\",
-      "BasePath": "_content/WebApplication1",
-      "RelativePath": "images/giphy-ezgif.com-resize (1).webp",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\giphy-ezgif.com-resize (1).webp"
-    },
-    {
       "Identity": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\images\\medscan_logo.jpg",
       "SourceId": "WebApplication1",
       "SourceType": "Discovered",
@@ -129,25 +110,6 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\medscan_logo.jpg"
-    },
-    {
-      "Identity": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\images\\pngtree-an-xray-of-the-spinal-ribs-image_13305332.jpg",
-      "SourceId": "WebApplication1",
-      "SourceType": "Discovered",
-      "ContentRoot": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\",
-      "BasePath": "_content/WebApplication1",
-      "RelativePath": "images/pngtree-an-xray-of-the-spinal-ribs-image_13305332.jpg",
-      "AssetKind": "All",
-      "AssetMode": "All",
-      "AssetRole": "Primary",
-      "AssetMergeBehavior": "PreferTarget",
-      "AssetMergeSource": "",
-      "RelatedAsset": "",
-      "AssetTraitName": "",
-      "AssetTraitValue": "",
-      "CopyToOutputDirectory": "Never",
-      "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot\\images\\pngtree-an-xray-of-the-spinal-ribs-image_13305332.jpg"
     },
     {
       "Identity": "C:\\Users\\harri\\Desktop\\c#\\WebApplication1\\wwwroot\\js\\site.js",
