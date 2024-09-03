@@ -24,7 +24,7 @@ This system employs a trained neural network model to provide fast, accurate dia
 - Frontend: HTML, CSS, JavaScript, React
 - Backend: ASP.NET Core
 - AI Model: TensorFlow.js
-- Database: SQL
+- Database: SQL.
 
 ## Installation and Setup
 - Need to have .net8 installed
